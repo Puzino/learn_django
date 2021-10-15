@@ -4,6 +4,7 @@ from django.http import Http404
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 
+
 def index(request):
     # домашняя страница
     return render(request, 'learning_logs/index.html')
@@ -19,18 +20,18 @@ def topics(request):
 def topic(request, topic_id):
     """Выводит одну тему и все ее записи"""
     topic = Topic.objects.get(id=topic_id)
-    # проверка того, что тему принадлежит текущему пользователю
+    # проверка того, что темa принадлежит текущему пользователю
     if topic.owner != request.user:
         raise Http404
 
-    entries = topic.entry_set.order_by('date_added')
+    entries = topic.entry_set.order_by('-date_added')
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
 
 @login_required
 def new_topic(request):
     """Определяет новую тему."""
-    if request.method != 'POST':
+    if request.method != 'POST' :
         # данные не отправлялись: создается пустая форма
         form = TopicForm()
     else:
@@ -85,3 +86,22 @@ def edit_entry(request, entry_id):
 
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
+
+# def delete_entry(request, entry_id):
+    
+# # def delete_new(request, new_id):
+#     new_to_delete = get_object_or_404(Entry, id=entry_id)
+#     #+some code to check if this object belongs to the logged in user
+
+#     if request.method == 'POST':
+#         form = DeleteNewForm(request.POST, instance=new_to_delete)
+
+#         if form.is_valid(): # checks CSRF
+#             new_to_delete.delete()
+#             return HttpResponseRedirect("/") # wherever to go after deleting
+
+#     else:
+#         form = DeleteNewForm(instance=new_to_delete)
+
+#     context = {'form': form}
+#     return render(request, 'learning_logs/delete_entry.html', context)

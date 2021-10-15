@@ -1,0 +1,13 @@
+{% extends "pizzass/base.html" %}
+{% block content %}
+<p>Toppings</p>
+<ul>
+  {% for topic in topics %}
+    <li>
+    	<a href="{% url 'pizzass:topic' topic.id %}">{{ topic }}</a>
+    </li>
+  {% empty %}
+    <li>No topicks have been added yet.</li>
+  {% endfor %}
+</ul>
+{% endblock content %}

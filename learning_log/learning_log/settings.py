@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from typing import Text
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +35,8 @@ INSTALLED_APPS = [
     # мои приложения
     'learning_logs',
     'users',
+    # сторонние приложения
+    'bootstrap4',
     # приложения по умолчанию
     'django.contrib.admin',
     'django.contrib.auth',
@@ -107,13 +110,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU' #eu-uk
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False #True
+
+DATE_FORMAT = 'd E Y'
 
 USE_TZ = True
 
