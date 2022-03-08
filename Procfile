@@ -1,0 +1,1 @@
+worked: python learning_log/manage.py runserver
