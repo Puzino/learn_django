@@ -1,2 +1,7 @@
 {% extends "learning_logs/base.html" %}
-запись удалена
+{% load bootstrap4 %}
+
+{% block page_header %}<h3>Entry deleting</h3>{% endblock page_header %}
+{% block content %}
+    <a href="{% url 'learning_logs:topics' %}">Back to Topics.</a>
+{% endblock content %}

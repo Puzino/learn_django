@@ -1,10 +1,10 @@
 {% extends "learning_logs/base.html" %}
 {% block page_header %}
-  <div class="jumbotron">
-  	<h1 class="display-3">Следите за своим обучением.</h1>
-  	<p class="lead">Сделайте свой собственный журнал обучения и ведите список
-        темы, которую вы изучаете. Когда вы узнаете что-то новое
-        по теме, сделайте запись, обобщающую то, что вы узнали.</p>
-  	<a href="{% url 'users:register' %}" class="btn btn-lg btn-primary" role="button">Регистрация &raquo;</a>
-  </div>
+    <div class="jumbotron">
+        <h1 class="display-3">
+            Keep track of your learning.</h1>
+        <p class="lead">Make your learning journal and keep a list of the topics you are learning. When you learn
+            something new on a topic, make a note summarizing what you have learned.</p>
+        <a href="{% url 'users:register' %}" class="btn btn-lg btn-primary" role="button">Registration &raquo;</a>
+    </div>
 {% endblock page_header %}

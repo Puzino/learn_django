@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from .models import Topic, Entry
+from django.shortcuts import render, redirect
+
 from .forms import TopicForm, EntryForm
+from .models import Topic, Entry
 
 
 def index(request):
     # домашняя страница
     return render(request, 'learning_logs/index.html')
+
 
 @login_required
 def topics(request):
@@ -15,6 +17,7 @@ def topics(request):
     topics = Topic.objects.filter(owner=request.user).order_by('date_added')
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
+
 
 @login_required
 def topic(request, topic_id):
@@ -28,10 +31,18 @@ def topic(request, topic_id):
     context = {'topic': topic, 'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
 
+
+@login_required
+def delete_topic(request, topic_id):
+    form = Topic.objects.filter(id=topic_id).delete()
+    context = {'form': form}
+    return render(request, 'learning_logs/delete_topic.html', context)
+
+
 @login_required
 def new_topic(request):
     """Определяет новую тему."""
-    if request.method != 'POST' :
+    if request.method != 'POST':
         # данные не отправлялись: создается пустая форма
         form = TopicForm()
     else:
@@ -45,6 +56,7 @@ def new_topic(request):
     # выведет пустую или недействительную форму
     context = {'form': form}
     return render(request, 'learning_logs/new_topic.html', context)
+
 
 @login_required
 def new_entry(request, topic_id):
@@ -64,6 +76,7 @@ def new_entry(request, topic_id):
     # выведет пустую или недействительную форму
     context = {'topic': topic, 'form': form}
     return render(request, 'learning_logs/new_entry.html', context)
+
 
 @login_required
 def edit_entry(request, entry_id):
@@ -87,21 +100,9 @@ def edit_entry(request, entry_id):
     context = {'entry': entry, 'topic': topic, 'form': form}
     return render(request, 'learning_logs/edit_entry.html', context)
 
-# def delete_entry(request, entry_id):
-    
-# # def delete_new(request, new_id):
-#     new_to_delete = get_object_or_404(Entry, id=entry_id)
-#     #+some code to check if this object belongs to the logged in user
 
-#     if request.method == 'POST':
-#         form = DeleteNewForm(request.POST, instance=new_to_delete)
-
-#         if form.is_valid(): # checks CSRF
-#             new_to_delete.delete()
-#             return HttpResponseRedirect("/") # wherever to go after deleting
-
-#     else:
-#         form = DeleteNewForm(instance=new_to_delete)
-
-#     context = {'form': form}
-#     return render(request, 'learning_logs/delete_entry.html', context)
+@login_required
+def delete_entry(request, delete_id):
+    form = Entry.objects.filter(id=delete_id).delete()
+    context = {'form': form}
+    return render(request, 'learning_logs/delete_entry.html', context)
