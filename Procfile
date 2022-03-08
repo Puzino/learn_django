@@ -1,1 +1,1 @@
-worked: python learning_log/manage.py runserver
+web: gunicorn learning_journal.wsgi --log-file -
