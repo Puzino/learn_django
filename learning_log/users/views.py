@@ -1,6 +1,7 @@
-from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render
+
 
 def register(request):
     """Регестрируем нового пользователя"""
@@ -16,7 +17,7 @@ def register(request):
             # выполнение входа и перенаправление на домашнюю страницу
             login(request, new_user)
             return redirect('learning_logs:index')
-    
+
     # вывести пустую или недействительную форму
     context = {'form': form}
     return render(request, 'registration/register.html', context)

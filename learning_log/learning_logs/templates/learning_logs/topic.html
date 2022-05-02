@@ -10,21 +10,27 @@
     </p>
 
     <ul>
-    {% for entry in entries %}
-        <div class="card mb-3">
-            <h4 class="card-header">
-                {{ entry.date_added|date:'M d, Y H:i' }}
-                <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">
-                    Change entry.</a></small>
-                <small style="margin-left: 30%;"><a style="color: red;" href="{% url 'learning_logs:delete_entry' entry.id %}">
-                    Delete entry.</a></small>
-            </h4>
-            <div class="card-body">
-                {{ entry.text|linebreaks }}
+        {% for entry in entries %}
+            <div class="card mb-3">
+                <h4 class="card-header">
+                    {{ entry.date_added|date:'M d, Y H:i'}}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'learning_logs:edit_entry' entry.id %}">Edit</a>
+                            <div class="dropdown-divider"></div>
+                            <a style="color: red;" class="dropdown-item" href="{% url 'learning_logs:delete_entry' entry.id %}">Delete</a>
+                        </div>
+                    </div>
+                </h4>
+                <div class="card-body">
+                    {{ entry.text|linebreaks }}
+                </div>
             </div>
-        </div>
-        {% empty %}
-        <p>There are no posts on this topic yet.</p>
-    {% endfor %}
-
+            {% empty %}
+            <p>There are no posts on this topic yet.</p>
+        {% endfor %}
 {% endblock content %}

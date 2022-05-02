@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Topic(models.Model):
@@ -27,4 +27,3 @@ class Entry(models.Model):
             return f'{self.text[:50]}...'
         else:
             return self.text
-

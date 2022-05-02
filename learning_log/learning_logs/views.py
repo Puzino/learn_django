@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import TopicForm, EntryForm
-from .models import Topic, Entry
+from .forms import EntryForm, TopicForm
+from .models import Entry, Topic
 
 
 def index(request):

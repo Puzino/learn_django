@@ -1,5 +1,6 @@
 '''Определяем схемы urls для пользователей'''
-from django.urls import path, include
+from django.urls import include, path
+
 from . import views
 
 app_name = 'users'

@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+import django_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'users',
     # сторонние приложения
     'bootstrap4',
+    'django_extensions',
     # приложения по умолчанию
     'django.contrib.admin',
     'django.contrib.auth',
@@ -139,8 +142,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # мои настройки
 LOGIN_URL = '/users/login/'
-
-import django_heroku
 
 django_heroku.settings(locals())
 
